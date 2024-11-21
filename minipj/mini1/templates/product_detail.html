@@ -1,0 +1,44 @@
+<!-- product_detail.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 400px;width:300px;margin-left: 25%;">
+                    </div>
+                    <div class="col-4">
+                        <div class="card-body">
+                            <h1 class="card-title">{{ product.name }}</h1>
+                            <p><strong>Description:</strong> {{ product.bio }}</p>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <p><strong>Stock:</strong> {{ product.stock }}</p><br>
+                        <p><strong>Price:</strong> ${{ product.price }}</p><br>
+                        <p><strong>Rating:</strong> {{ product.rating }}</p><br>
+
+                        <!-- Only enable the "Add to Cart" button if stock > 0 -->
+                        {% if product.stock > 0 %}
+                            <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary mt-3">Add to Cart</a>
+                        {% else %}
+                            <button class="btn btn-secondary mt-3" disabled>Out of Stock</button>
+                        {% endif %}
+                    </div>
+                </div>
+                <a href="{% url 'home' %}" class="btn btn-primary mt-3">Back to Products</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
